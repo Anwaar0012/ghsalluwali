@@ -1,0 +1,80 @@
+<style>
+  .active-link {
+    background-color: #28a745 !important;
+    /* Dark background color */
+    color: #ffffff !important;
+    /* White text color */
+    border-radius: 0.25rem;
+    /* Rounded border */
+  }
+
+  /* Change navbar background color */
+    .navbar-custom {
+      background-color: black; /* Change to your desired color */
+    }
+
+    /* Change navbar link color */
+    .navbar-custom .navbar-nav .nav-link {
+      color: white; /* Change to your desired color */
+    }
+
+    /* Change toggler button color */
+    .navbar-custom .navbar-toggler-icon {
+      background-color: white; /* Change to your desired color */
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+{% comment %} style="background-color: #E7ECE9;" {% endcomment %}
+{% comment %} </div> {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">GHS ALLUWALI</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      {% comment %} {% if request.user.is_authenticated%} {% endcomment %}
+      <ul class="navbar-nav">
+        <li class="nav-item {% block homeactive %}{% endblock homeactive%}">
+          <a class="nav-link {% if request.path == '/' %}active-link{% endif %} " href="{% url 'index' %}">Home</a>
+        </li>
+        <li class="nav-item {% block staffactive %}{% endblock staffactive%}">
+          <a class="nav-link {% if request.path == '/school/staff/' %}active-link{% endif %}"
+            href="{% url 'staff' %}">Staff List</a>
+        </li>
+        <li class="nav-item" {% block studentactive %}{% endblock studentactive%}>
+            <a class="nav-link {% if request.path == '/school/students/' %}active-link{% endif %}"
+            href="{% url 'students' %}">Students List</a>
+        </li>
+
+        {% comment %} <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Reports
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/invoice/gen-report-invoice">Transaction</a></li>
+            <li><a class="dropdown-item" href="/invoice/gen-report-shops">Shops</a></li>
+            <li><a class="dropdown-item" href="/invoice/gen-report-recovery">Recovery</a></li>
+          </ul>
+        </li> {% endcomment %}
+        {% comment %} <li class="nav-item">
+          <a href="{% url 'logout' %}" role="button" class="btn btn-outline-success my-2 my-sm-0"
+            type="submit">Logout</a>
+        </li> {% endcomment %}
+
+      </ul>
+      {% comment %} {% else %} {% endcomment %}
+      
+          {% comment %} <a href="{% url 'login' %}" role="button" target="_blank" class="btn btn-outline-success mx-4 my-2 my-sm-0"
+            type="submit">Login</a> {% endcomment %}
+
+
+          {% comment %} <a href="{% url 'signup' %}" role="button" target="_blank" class="btn btn-outline-success my-2 my-sm-0"
+            type="submit">Signup</a>  {% endcomment %}
+ 
+      {% comment %} {% endif %} {% endcomment %}
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block studentactive %} active {% endblock studentactive %}
+{% block extra_head %} <style>
+    /* Custom styling for first and last buttons */
+    .paginate_button.first,
+    .paginate_button.last {
+        background-color: #b5f795; /* Change to your desired color */
+        color: #fff; /* Change to your desired text color */
+        border-color: #007bff; /* Change to your desired border color */
+    }
+</style>{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h6 class="card-title bg-success text-white center text-center py-2">LIST OF Students GHS ALLUWALI</h6>
+    <!-- Link to Add Manager page -->
+    {% comment %} <a href="#" class="btn btn-primary mb-3">Add Manager</a> {% endcomment %}
+    {% comment %} <a href="{% url 'add_manager' %}" class="btn btn-primary mb-3">Add Manager</a> {% endcomment %}
+
+
+    <!-- Table to display manager data -->
+    <div class="table-responsive">
+        <table id="route-table" class="table">
+        <thead>
+            <tr>
+                <th>Sr#</th>
+                <th>Photo</th>
+                <th>Admission No</th>
+                <th>Admission Date</th>
+                <th>Name</th>
+                <th>Father's Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Class</th>
+                <th>Form-B No</th>
+                <th>Contact No</th>
+                {% comment %} <th>Edit</th>
+                <th>Delete</th> {% endcomment %}
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dummy data -->
+            {% for student in students %} 
+            <tr>
+                {% comment %} <td>1</td>
+                <td>anwaar</td>
+                <td>03012476595</td>
+                <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
+                <td><a href="#" class="btn btn-sm btn-danger">Delete</a></td> {% endcomment %}
+                <td>{{ student.id }}</td>
+                <td><img src='/media/{{student.image}}' class="card-img-top" alt="..."></td>
+                <td>{{ student.admission_no }}</td>
+                <td>{{ student.admission_date }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.fathername }}</td>
+                <td>{{ student.date_of_birth }}</td>
+                <td>{{ student.gender }}</td>
+                <td>{{ student.date_of_birth }}</td>
+                <td>{{ student.b_form_no }}</td>
+                <td>{{ student.contact_no }}</td>
+                {% comment %} <td><a href="{% url 'edit_manager' manager.id %}" class="btn btn-sm btn-primary">Edit</a></td>
+                <td><a href="{% url 'delete_manager' manager.id %}" class="btn btn-sm btn-danger">Delete</a></td> {% endcomment %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}
+{% block custom_js %}
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#route-table').DataTable({
+            "pagingType": "full_numbers", // Use full pagination controls
+            "pageLength": 10, // Show 10 entries per page
+            "lengthMenu": [10, 25, 50, 75, 100], // Entries per page options
+            "language": {
+                "paginate": {
+                    "previous": "«",
+                    "next": "»"
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block manageractive %} active {% endblock manageractive %}
+{% block extra_head %} <style>
+    /* Custom styling for first and last buttons */
+    .paginate_button.first,
+    .paginate_button.last {
+        background-color: #b5f795; /* Change to your desired color */
+        color: #fff; /* Change to your desired text color */
+        border-color: #007bff; /* Change to your desired border color */
+    }
+</style>{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h6 class="card-title bg-success text-white center text-center py-2">LIST OF STAFF GHS ALLUWALI</h6>
+    <!-- Link to Add Manager page -->
+    {% comment %} <a href="#" class="btn btn-primary mb-3">Add Manager</a> {% endcomment %}
+    {% comment %} <a href="{% url 'add_manager' %}" class="btn btn-primary mb-3">Add Manager</a> {% endcomment %}
+
+
+    <!-- Table to display manager data -->
+    <div class="table-responsive">
+        <table id="route-table" class="table">
+        <thead>
+            <tr>
+                <th>Sr#</th>
+                <th>Photo</th>
+                <th>Personal No</th>
+                <th>Name</th>
+                <th>Father's Name</th>
+                <th>Gender</th>
+                <th>CNIC NO</th>
+                <th>Designation</th>
+                <th>Scale</th>
+                <th>Date of Birth</th>
+                <th>Date of First Joining</th>
+                <th>Date of Joining Present Scale</th>
+                <th>Present School Joining</th>
+                <th>Bank Account No</th>
+                <th>Bank Name</th>
+                <th>Contact</th>
+                <th>Address</th>
+                {% comment %} <th>Edit</th>
+                <th>Delete</th> {% endcomment %}
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dummy data -->
+            {% for employee in employees %} 
+            <tr>
+                {% comment %} <td>1</td>
+                <td>anwaar</td>
+                <td>03012476595</td>
+                <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
+                <td><a href="#" class="btn btn-sm btn-danger">Delete</a></td> {% endcomment %}
+                <td>{{ employee.id }}</td>
+                <td><img src='/media/{{employee.image}}' class="card-img-top" alt="..."></td>
+                <td>{{ employee.personalno }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.fname }}</td>
+                <td>{{ employee.gender }}</td>
+                <td>{{ employee.cnic }}</td>
+                <td>{{ employee.designation }}</td>
+                <td>{{ employee.scale }}</td>
+                <td>{{ employee.date_of_birth }}</td>
+                <td>{{ employee.date_of_first_joining }}</td>
+                <td>{{ employee.date_of_joining_present_scale }}</td>
+                <td>{{ employee.date_of_joining_present_school }}</td>
+                <td>{{ employee.accountno }}</td>
+                <td>{{ employee.bank }}</td>
+                <td>{{ employee.phoneno }}</td>
+                <td>{{ employee.address }}</td>
+                {% comment %} <td><a href="{% url 'edit_manager' manager.id %}" class="btn btn-sm btn-primary">Edit</a></td>
+                <td><a href="{% url 'delete_manager' manager.id %}" class="btn btn-sm btn-danger">Delete</a></td> {% endcomment %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}
+{% block custom_js %}
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#route-table').DataTable({
+            "pagingType": "full_numbers", // Use full pagination controls
+            "pageLength": 10, // Show 10 entries per page
+            "lengthMenu": [10, 25, 50, 75, 100], // Entries per page options
+            "language": {
+                "paginate": {
+                    "previous": "«",
+                    "next": "»"
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
